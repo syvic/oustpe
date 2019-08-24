@@ -35,10 +35,10 @@ void loop() {
 
   accel_read();
 
+  if (recvd_msg_flag) {
 
-  if (recvd_msg_flag){
+    if (recvd_msg.type == MSG_TYPE_JOIN) {
 
-    if (recvd_msg.type==MSG_TYPE_JOIN){
       Serial.print("Mensaje de JOIN recibido desde UUID ");
       Serial.print(recvd_msg.uuid);
       Serial.print(" al grupo ");
@@ -46,32 +46,34 @@ void loop() {
 
       //Miramos a ver si el mensaje de JOIN ya lo habíamos recibido para ese UUID
       //También es importante controlar que un nodo no mande varias veces un mensaje de JOIN
-      if (!game_search_player(recvd_msg.uuid, num_players)){
+      if (!game_search_player(recvd_msg.uuid, num_players)) {
         game_add_player(recvd_msg.uuid);
       }
-    }
 
-    if (recvd_msg.type==MSG_TYPE_START){
+    } else if (recvd_msg.type == MSG_TYPE_START) {
+
       Serial.print("Mensaje de START recibido desde UUID ");
       Serial.print(recvd_msg.uuid);
       Serial.print(" al grupo ");
       Serial.println(recvd_msg.group);
-    }
 
-    if (recvd_msg.type==MSG_TYPE_DEAD){
+    } else if (recvd_msg.type == MSG_TYPE_DEAD) {
+
       Serial.print("Mensaje de DEAD recibido desde UUID ");
       Serial.print(recvd_msg.uuid);
       Serial.print(" al grupo ");
       Serial.println(recvd_msg.group);
 
       //Aquí meter el control de que cuando sólo quede un jugador se llame a la función que resetea el juego después de una secuencia de luces o algo así
+
     }
 
-
     recvd_msg_flag=false;
+
   }
 
   //utils_test_sender(group);
 
 
 }
+
