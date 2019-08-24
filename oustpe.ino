@@ -26,7 +26,7 @@ void loop() {
   
   yield();
 
-  utils_test_sender(group);
+  //utils_test_sender(group);
 
 
 }

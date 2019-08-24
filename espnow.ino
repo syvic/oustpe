@@ -49,8 +49,13 @@ static void espnow_msg_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int
     esp_now_msg_t msg;
     memcpy(&msg, data, len);
 
-    //Serial.print("Counter: ");
-    //Serial.println(msg.counter);
+    Serial.print("Recibido: TYPE= ");
+    Serial.print(msg.type);
+    Serial.print(" UUID= ");
+    Serial.print(msg.uuid, HEX);
+    Serial.print(" GRUPO= ");
+    Serial.println(msg.group, HEX);
+    
     digitalWrite(LED_PIN, !digitalRead(LED_PIN));
   }
 }
