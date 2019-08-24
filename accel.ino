@@ -2,9 +2,9 @@
 // Sensor ADXL335 - 
 
 
-const int xpin = 2; // x-axis of the accelerometer
+const int xpin = 34; // x-axis of the accelerometer
 const int ypin = 4; // y-axis
-const int zpin = 36; // z-axis
+const int zpin = 39; // z-axis
 
 void accel_read() {
     int x = analogRead(xpin); //read from xpin
@@ -13,14 +13,23 @@ void accel_read() {
     delay(1);
     int z = analogRead(zpin); //read from zpin
 
+    //Serial.println("Lecturas en bruto del ADC");
+    Serial.print(x);
+    Serial.print(" ");
+    Serial.print(y);
+    Serial.print(" ");
+    Serial.println(x);
+    //Serial.print("  ->  ");
+
+
     float zero_G = 512.0; //ADC is 0~1023 the zero g output equal to Vs/2
     float scale = 102.3; //ADXL335330 Sensitivity is 330mv/g
     //330 * 1024/3.3/1000
-    Serial.print(((float)x - 331.5)/65*9.8); //print x value on serial monitor
-    Serial.print("\t");
-    Serial.print(((float)y - 329.5)/68.5*9.8); //print y value on serial monitor
-    Serial.print("\t");
-    Serial.print(((float)z - 340)/68*9.8); //print z value on serial monitor
-    Serial.print("\n");
-    delay(1000); //wait for 1 second
+    //Serial.print(((float)x - 331.5)/65*9.8); //print x value on serial monitor
+    //Serial.print("\t");
+    //Serial.print(((float)y - 329.5)/68.5*9.8); //print y value on serial monitor
+    //Serial.print("\t");
+    //Serial.print(((float)z - 340)/68*9.8); //print z value on serial monitor
+    //Serial.print("\n");
+    delay(100); //wait for 1 second
 }

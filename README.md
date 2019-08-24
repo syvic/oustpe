@@ -1,1 +1,3 @@
 # oustpe
+
+Decentralized Oust game

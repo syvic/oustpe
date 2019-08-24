@@ -37,8 +37,12 @@ START
   - GROUP
 
 
-
 TODO
+====================================
+- En alguna ocasión se han perdido paquetes, mandarlos por triplicado...
+
+
+TODO FUTURAS VERSIONES
 ====================================
 - Poder cambiar la sensibilidad
 - Crear un nodo central para poder recoger estadísticas
