@@ -1,0 +1,48 @@
+accel_read	./accel.ino	/^void accel_read() {$/;"	f
+broadcast_mac	./espnow.ino	/^static uint8_t broadcast_mac[] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };$/;"	v	file:
+espnow_handle_error	./espnow.ino	/^static void espnow_handle_error(esp_err_t err) {$/;"	f	file:
+espnow_msg_recv_cb	./espnow.ino	/^static void espnow_msg_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int len) {$/;"	f	file:
+espnow_msg_send_cb	./espnow.ino	/^static void espnow_msg_send_cb(const uint8_t* mac, esp_now_send_status_t sendStatus) {$/;"	f	file:
+esp_now_msg_t	./oustpe.h	/^} esp_now_msg_t;$/;"	t	typeref:struct:esp_now_msg_t
+esp_now_msg_t	./oustpe.h	/^typedef struct __attribute__((packed)) esp_now_msg_t {$/;"	s
+espnow_network_setup	./espnow.ino	/^static void espnow_network_setup() {$/;"	f	file:
+espnow_send_msg	./espnow.ino	/^static void espnow_send_msg(esp_now_msg_t *msg) {$/;"	f	file:
+game_add_player	./game.ino	/^void game_add_player(uint32_t id){$/;"	f
+game_reset	./game.ino	/^void game_reset(){$/;"	f
+game_search_player	./game.ino	/^boolean game_search_player(uint32_t id, byte num_players){$/;"	f
+group	./oustpe.h	/^  uint16_t group;$/;"	m	struct:esp_now_msg_t
+LED_PIN	./oustpe.ino	10;"	d	file:
+loop	./oustpe.ino	/^void loop() {$/;"	f
+MAX_PLAYERS	./oustpe.ino	8;"	d	file:
+MSG_TYPE_DEAD	./oustpe.h	/^  MSG_TYPE_DEAD$/;"	e	enum:msg_type
+MSG_TYPE_JOIN	./oustpe.h	/^  MSG_TYPE_JOIN,$/;"	e	enum:msg_type
+msg_type	./oustpe.h	/^enum msg_type{$/;"	g
+MSG_TYPE_START	./oustpe.h	/^  MSG_TYPE_START,$/;"	e	enum:msg_type
+my_uuid	./oustpe.ino	/^uint32_t my_uuid;$/;"	v
+num_players	./oustpe.ino	/^static byte num_players=1;$/;"	v	file:
+__OUSTPE_H	./oustpe.h	2;"	d
+players	./oustpe.ino	/^uint32_t players[MAX_PLAYERS];$/;"	v
+PULSADOR	./oustpe.ino	11;"	d	file:
+recvd_msg_flag	./oustpe.ino	/^boolean recvd_msg_flag;$/;"	v
+recvd_msg	./oustpe.ino	/^esp_now_msg_t recvd_msg;$/;"	v
+setup	./oustpe.ino	/^void setup() {$/;"	f
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+type	./oustpe.h	/^  uint16_t type;$/;"	m	struct:esp_now_msg_t
+utils_get_chip_id	./utils.ino	/^unsigned long utils_get_chip_id() {$/;"	f
+utils_test_sender	./utils.ino	/^void utils_test_sender(uint16_t group) {$/;"	f
+uuid	./oustpe.h	/^  uint32_t uuid;$/;"	m	struct:esp_now_msg_t
+WIFI_CHANNEL	./oustpe.ino	9;"	d	file:
+xpin	./accel.ino	/^const int xpin = A0; \/\/ x-axis of the accelerometer$/;"	v
+ypin	./accel.ino	/^const int ypin = A3; \/\/ y-axis$/;"	v
+zpin	./accel.ino	/^const int zpin = A4; \/\/ z-axis$/;"	v

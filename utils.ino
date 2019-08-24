@@ -21,16 +21,7 @@ void utils_test_sender(uint16_t group) {
 
   if (digitalRead(PULSADOR) == HIGH) {   // Mandar mensaje de JOIN
     msg.type = MSG_TYPE_JOIN;
-    msg.uuid = uuid;
-    msg.group = group;
-    espnow_send_msg(&msg);
-  }
-
-  delay(1000);
-
-  if (1) { // Mandar mensaje de start
-    msg.type = MSG_TYPE_START;
-    msg.uuid = uuid;
+    msg.uuid = my_uuid;
     msg.group = group;
     espnow_send_msg(&msg);
   }
@@ -39,10 +30,20 @@ void utils_test_sender(uint16_t group) {
 
   if (1) { // Mandar mensaje de muerte
     msg.type = MSG_TYPE_DEAD;
-    msg.uuid = uuid;
+    msg.uuid = my_uuid;
     msg.group = group;
     espnow_send_msg(&msg);
   }
 
   delay(1000);
+  
+  if (1) { // Mandar mensaje de start
+    msg.type = MSG_TYPE_START;
+    msg.uuid = my_uuid;
+    msg.group = group;
+    espnow_send_msg(&msg);
+  }
+
+  delay(1000);
+
 }

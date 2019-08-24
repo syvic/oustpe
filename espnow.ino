@@ -47,16 +47,17 @@ static void espnow_handle_error(esp_err_t err) {
 static void espnow_msg_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int len) {
   if (len == sizeof(esp_now_msg_t)) {
     esp_now_msg_t msg;
-    memcpy(&msg, data, len);
+    memcpy(&recvd_msg, data, len);
+    recvd_msg_flag=true;
 
-    Serial.print("Recibido: TYPE= ");
-    Serial.print(msg.type);
-    Serial.print(" UUID= ");
-    Serial.print(msg.uuid, HEX);
-    Serial.print(" GRUPO= ");
-    Serial.println(msg.group, HEX);
+    //Serial.print("Recibido: TYPE= ");
+    //Serial.print(msg.type);
+    //Serial.print(" UUID= ");
+    //Serial.print(msg.uuid, HEX);
+    //Serial.print(" GRUPO= ");
+    //Serial.println(msg.group, HEX);
     
-    digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+    //digitalWrite(LED_PIN, !digitalRead(LED_PIN));
   }
 }
 
@@ -78,12 +79,15 @@ static void espnow_msg_send_cb(const uint8_t* mac, esp_now_send_status_t sendSta
 
 
 
-static void espnow_network_setup(void) {
-  //Puts ESP in STATION MODE
+static void espnow_network_setup() {
+
   WiFi.mode(WIFI_STA);
   WiFi.disconnect();
 
-  if (esp_now_init() != 0) return;
+  if (esp_now_init() != 0) {
+    Serial.println("Fallo al arrancar ESPNOW");
+    return;
+  }
 
   esp_now_peer_info_t peer_info;
   peer_info.channel = WIFI_CHANNEL;

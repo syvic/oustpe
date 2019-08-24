@@ -38,4 +38,13 @@ START
 
 
 
+TODO
+====================================
+- Poder cambiar la sensibilidad
+- Crear un nodo central para poder recoger estadísticas
+- Darle una vuelta a la posibilidad de que se pueda jugar por equipos dentro de la misma partida
+  - El join se hace secuencialmente a uno u otro grupo
+- Posibilidad de respawn si se hace cierto ejercicio (superar valor de aceleración n veces en un minuto)
+
+
 */
