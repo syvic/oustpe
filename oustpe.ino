@@ -11,12 +11,8 @@
 #define LED_PIN         18
 #define PULSADOR        15
 
-uint32_t my_uuid;
 boolean recvd_msg_flag;
 esp_now_msg_t recvd_msg;
-
-uint32_t players[MAX_PLAYERS];
-static byte num_players=1;
 
 void setup() {
   Serial.begin(115200);
@@ -27,31 +23,41 @@ void setup() {
   accel_config();
 
   espnow_network_setup();
-  my_uuid = utils_get_chip_id();
+
+  game_set_uuid(utils_get_chip_id());
+
 }
 
 
 void loop() {
-  uint16_t group=0x5A5A;
 
   yield();
 
   accel_read();
 
-  switch (button_get_state()){
-      case   BUTTON_PRESS_NONE:
+  // *** aquí debería controlarse el estado de muerte via acelerómetro y enviarlo a los compañeros
+  //if (game_state == GAME_STARTED && CONDICION_MUERTE) game_dead();
+
+  // controles
+  switch (button_get_state()) {
+      case BUTTON_PRESS_NONE:
           break;
       case BUTTON_PRESS_SHORT:
           Serial.println("[BTN] SHORT");
+          if (game_state == GAME_INITIAL || (game_state == GAME_ENDED && !num_players_alive)) game_join();
           break;
       case BUTTON_PRESS_LONG:
           Serial.println("[BTN] LONG");
+          if (game_state == GAME_JOINED) game_start();
+          //if (game_state == GAME_ENDED) game_reset();
           break;
   }
 
   if (recvd_msg_flag) {
 
     if (recvd_msg.type == MSG_TYPE_JOIN) {
+
+      // *** si se recibe un JOIN, pero estamos a mitad de partida, ignorar
 
       Serial.print("Mensaje de JOIN recibido desde UUID ");
       Serial.print(recvd_msg.uuid);
@@ -73,6 +79,9 @@ void loop() {
 
     } else if (recvd_msg.type == MSG_TYPE_DEAD) {
 
+      // alguien ha muerto!
+      num_players_alive--;
+
       Serial.print("Mensaje de DEAD recibido desde UUID ");
       Serial.print(recvd_msg.uuid);
       Serial.print(" al grupo ");
@@ -87,7 +96,6 @@ void loop() {
   }
 
   //utils_test_sender(group);
-
 
 }
 
