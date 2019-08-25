@@ -21,6 +21,8 @@ void setup() {
 
   accel_config();
 
+  rgb_init();
+
   espnow_network_setup();
 
   game_set_uuid(utils_get_chip_id());
@@ -58,6 +60,7 @@ void loop() {
   }
 
 
+  //Control de mensajes entrantes
   if (recvd_msg_flag) {
 
     if (recvd_msg.type == MSG_TYPE_JOIN) {

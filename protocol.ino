@@ -12,6 +12,11 @@ void protocol_send_cmd(uint16_t m_type, uint32_t m_uuid, uint16_t m_group) {
     msg.type = m_type;
     msg.uuid = m_uuid;
     msg.group = m_group;
-    espnow_send_msg(&msg);
+
+    //Enviamos el mensaje tres veces para garantizar la entrega
+    for (byte i=0; i<3; i++){
+        espnow_send_msg(&msg);
+        delay(random(1,20));
+    }
 
 }
