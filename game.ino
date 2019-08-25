@@ -36,7 +36,7 @@ void game_dead() {
 
 boolean game_search_player(uint32_t id, byte num_players){
   for (byte i=0; i<num_players; i++){
-    if (id == players[i]) {
+    if (id == players[i].uuid) {
       Serial.println("ID Encontrado");
       return 1;
     }
@@ -51,7 +51,9 @@ void game_add_player(uint32_t id){
   Serial.print(" en posición ");
   Serial.println(num_players);
 
-  players[num_players-1]=id;
+  player_t *player=&players[num_players-1];
+  player->uuid=id;
+  player->dead=false;
   num_players++;
 
 }

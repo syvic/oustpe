@@ -1,7 +1,7 @@
 #ifndef __OUSTPE_H
 #define __OUSTPE_H
 
-#define MAX_PLAYERS     64
+#define MAX_PLAYERS     sizeof(byte)
 #define THRESHOLD       512
 
 
@@ -27,10 +27,15 @@ typedef struct __attribute__((packed)) esp_now_msg_t {
 uint32_t my_uuid;
 uint16_t my_group=0x5A5A;
 
+typedef struct {
+  uint32_t uuid;
+  bool dead;
+} player_t;
+
 int game_state=GAME_INITIAL;
 static byte num_players=1;
 static byte num_players_alive=1;
 
-uint32_t players[MAX_PLAYERS];
+player_t players[MAX_PLAYERS];
 
 #endif
