@@ -1,7 +1,7 @@
 #ifndef __OUSTPE_H
 #define __OUSTPE_H
 
-// maxplayers según protocolo
+// maxplayers según protocolo es de 20 (https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/network/esp_now.html#)
 #define MAX_PLAYERS     20
 #define THRESHOLD       512
 
