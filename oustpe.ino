@@ -71,7 +71,7 @@ void loop() {
 
       //Miramos a ver si el mensaje de JOIN ya lo habíamos recibido para ese UUID
       //También es importante controlar que un nodo no mande varias veces un mensaje de JOIN
-      if (!game_search_player(recvd_msg.uuid, num_players)) {
+      if (game_search_player(recvd_msg.uuid, num_players) == -1 ) {
         game_add_player(recvd_msg.uuid);
       }
 
@@ -81,6 +81,10 @@ void loop() {
       Serial.print(recvd_msg.uuid);
       Serial.print(" al grupo ");
       Serial.println(recvd_msg.group);
+
+      if (game_search_player(recvd_msg.uuid, num_players) == -1 ) {
+        game_del_player(recvd_msg.uuid);
+      }
 
     } else if (recvd_msg.type == MSG_TYPE_DEAD) {
 
@@ -100,7 +104,7 @@ void loop() {
 
   }
 
-  //utils_test_sender(group);
+  //utils_test_sender(my_group);
 
 }
 

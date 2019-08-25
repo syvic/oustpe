@@ -34,17 +34,20 @@ void game_dead() {
   num_players_alive--;
 }
 
-boolean game_search_player(uint32_t id, byte num_players){
+//Función que indica si existe un determinado jugador que haya hecho JOIN
+//Devuelve la posición en la que se encuentra
+int game_search_player(uint32_t id, byte num_players){
   for (byte i=0; i<num_players; i++){
     if (id == players[i].uuid) {
       Serial.println("ID Encontrado");
-      return 1;
+      return i;
     }
   }
   Serial.print("ID no encontrado. ");
-  return 0;
+  return -1;
 }
 
+//Función que añade un jugador a la tabla. Llamar sólo si se ha comprobado que no estaba
 void game_add_player(uint32_t id){
   Serial.print("Insertando jugador ");
   Serial.print(id, HEX);
@@ -55,6 +58,19 @@ void game_add_player(uint32_t id){
   player->uuid=id;
   player->dead=false;
   num_players++;
+
+}
+
+//Función que "elimina" un jugador de la tabla.
+void game_del_player(uint32_t id){
+  Serial.print("Eliminando jugador ");
+  Serial.print(id, HEX);
+  Serial.print(" en posición ");
+  Serial.println(num_players);
+
+  player_t *player=&players[id];
+  player->dead=true;
+  num_players--;
 
 }
 
