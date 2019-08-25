@@ -18,12 +18,14 @@ void accel_config(){
     analogSetAttenuation(ADC_6db); // Default is 11db which is very noisy. Recommended to use 2.5 or 6.
 }
 
-void accel_read() {
+int16_t accel_read() {
     static uint32_t last_t_read=0;
-    int accel_readings[3][NUM_ADC_READINGS+1];
     static int last_reading[3]={-1,-1,-1};
+    static uint16_t last_accel_reading=0;
+    int accel_readings[3][NUM_ADC_READINGS+1];
+    uint16_t accel_sum=0;
 
-    if (millis()-last_t_read < 100) return;
+    if (millis()-last_t_read < 100) return last_accel_reading;
 
     last_t_read=millis();
 
@@ -56,15 +58,14 @@ void accel_read() {
         //Serial.print(" ");
         //Serial.print(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
         //Serial.println();
-        Serial.print(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
-        Serial.print(" ");
-        last_reading[j]=accel_readings[j][NUM_ADC_READINGS];
+        //Serial.print(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
+        //Serial.print(" ");
+        accel_sum += abs(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
+        last_reading[j]=accel_readings[j][NUM_ADC_READINGS]; //Esto lo último siempre
     }
-    Serial.println();
+    //Serial.print(" ");
+    //Serial.println(accel_sum);
 
-
-    //calcular aquí el promedio de lecturas de cada valor y almacenarlo como lectura anterior
-    //luego calcular lo que difiere la lectura actual de la anterior y con esto plotear
-
-    //delay(100); //wait for 1 second
+    last_accel_reading = accel_sum;
+    return accel_sum;
 }

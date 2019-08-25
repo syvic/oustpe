@@ -6,10 +6,13 @@
 #include "oustpe.h"
 #include "button.h"
 
-#define MAX_PLAYERS     64
 #define WIFI_CHANNEL    1
 #define LED_PIN         18
 #define PULSADOR        15
+
+
+#define MAX_PLAYERS     64
+#define THRESHOLD       512
 
 uint32_t my_uuid;
 boolean recvd_msg_flag;
@@ -33,13 +36,16 @@ void setup() {
 
 void loop() {
   uint16_t group=0x5A5A;
+  int16_t movement;
 
   yield();
 
-  accel_read();
+  movement=accel_read();
+
+  Serial.println(movement);
 
   switch (button_get_state()){
-      case   BUTTON_PRESS_NONE:
+      case BUTTON_PRESS_NONE:
           break;
       case BUTTON_PRESS_SHORT:
           Serial.println("[BTN] SHORT");
