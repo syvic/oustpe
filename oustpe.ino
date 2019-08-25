@@ -23,6 +23,8 @@ void setup() {
 
   pinMode(LED_PIN, OUTPUT);
 
+  accel_config();
+
   espnow_network_setup();
   my_uuid = utils_get_chip_id();
 }
