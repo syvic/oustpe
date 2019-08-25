@@ -33,9 +33,6 @@ void loop() {
 
   yield();
 
-  movement=accel_read();
-
-  Serial.println(movement);
 
   // controles
   switch (button_get_state()) {
@@ -51,6 +48,15 @@ void loop() {
           //if (game_state == GAME_ENDED) game_reset();
           break;
   }
+
+  // Control de la muerte
+  if (movement=accel_read() > THRESHOLD){
+      Serial.print("DEMASIADO MOVIMIENTO!!!! ");
+      Serial.println(movement);
+      //(uint16_t m_type, uint32_t m_uuid, uint16_t m_group)
+      protocol_send_cmd(MSG_TYPE_DEAD, my_uuid, my_group);
+  }
+
 
   if (recvd_msg_flag) {
 

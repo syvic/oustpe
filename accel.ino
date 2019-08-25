@@ -4,8 +4,8 @@
 
 //Note: ADC2 pins cannot be used when Wi-Fi is used. So, if you’re using Wi-Fi and you’re having trouble getting the value from an ADC2 GPIO, you may consider using an ADC1 GPIO instead, that should solve your problem. 
 
-#define NUM_ADC_READINGS 2
-#define ACCEL_READING_INTERVAL 100
+#define NUM_ADC_READINGS 5
+#define ACCEL_READING_INTERVAL 50
 
 const int xpin = 34; // x-axis of the accelerometer
 const int ypin = 36; // y-axis
@@ -25,7 +25,7 @@ int16_t accel_read() {
     int accel_readings[3][NUM_ADC_READINGS+1];
     uint16_t accel_sum=0;
 
-    if (millis()-last_t_read < 100) return last_accel_reading;
+    if (millis()-last_t_read < 100) return -1; //last_accel_reading;
 
     last_t_read=millis();
 
