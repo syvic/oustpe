@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "oustpe.h"
+#include "button.h"
 
 #define MAX_PLAYERS     64
 #define WIFI_CHANNEL    1
@@ -36,6 +37,17 @@ void loop() {
   yield();
 
   accel_read();
+
+  switch (button_get_state()){
+      case   BUTTON_PRESS_NONE:
+          break;
+      case BUTTON_PRESS_SHORT:
+          Serial.println("[BTN] SHORT");
+          break;
+      case BUTTON_PRESS_LONG:
+          Serial.println("[BTN] LONG");
+          break;
+  }
 
   if (recvd_msg_flag) {
 

@@ -48,16 +48,19 @@ void accel_read() {
     //Serial.println();
 
     for (byte j=0; j<3; j++){
-        Serial.print(j);
-        Serial.print(" ");
-        Serial.print(accel_readings[j][NUM_ADC_READINGS]);
-        Serial.print(" ");
-        Serial.print(last_reading[j]);
-        Serial.print(" ");
+        //Serial.print(j);
+        //Serial.print(" ");
+        //Serial.print(accel_readings[j][NUM_ADC_READINGS]);
+        //Serial.print(" ");
+        //Serial.print(last_reading[j]);
+        //Serial.print(" ");
+        //Serial.print(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
+        //Serial.println();
         Serial.print(accel_readings[j][NUM_ADC_READINGS]-last_reading[j]);
-        Serial.println();
+        Serial.print(" ");
         last_reading[j]=accel_readings[j][NUM_ADC_READINGS];
     }
+    Serial.println();
 
 
     //calcular aquí el promedio de lecturas de cada valor y almacenarlo como lectura anterior

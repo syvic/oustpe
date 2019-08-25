@@ -1,6 +1,6 @@
 #include "button.h"
 
-byte get_button() {
+byte button_get_state() {
 
   static int btn_press=0;
   static bool btn_attended=false;
