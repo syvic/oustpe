@@ -1,7 +1,7 @@
 #ifndef __OUSTPE_H
 #define __OUSTPE_H
 
-#define MAX_PLAYERS     64
+#define MAX_PLAYERS     20
 #define THRESHOLD       512
 
 
