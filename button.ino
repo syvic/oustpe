@@ -2,7 +2,7 @@
 
 byte button_get_state() {
 
-  static int btn_press=0;
+  static unsigned int btn_press=0;
   static bool btn_attended=false;
 
   if (!digitalRead(BUTTON)) {

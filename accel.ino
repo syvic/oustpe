@@ -14,15 +14,21 @@ const int zpin = 39; // z-axis
 const byte adc_pins[]={34,36,39};
 
 void accel_config(){
+
+    //Configuración para Acelerómetro analógico
     analogReadResolution(11); // Default of 12 is not very linear. 
     analogSetAttenuation(ADC_6db); // Default is 11db which is very noisy. Recommended to use 2.5 or 6.
+}
+
+uint16_t accel_sensor_read(int axis){
+    return analogRead(adc_pins[axis]); //Implementación para sensor analógico
 }
 
 int16_t accel_read() {
     static uint32_t last_t_read=0;
     static int last_reading[3]={-1,-1,-1};
     static uint16_t last_accel_reading=0;
-    int accel_readings[3][NUM_ADC_READINGS+1];
+    uint16_t accel_readings[3][NUM_ADC_READINGS+1];
     uint16_t accel_sum=0;
 
     if (millis()-last_t_read < 100) return -1; //last_accel_reading;
@@ -32,7 +38,8 @@ int16_t accel_read() {
     //Acumulamos N lecturas del ADC para minimizar ruidos
     for (byte i=0; i<NUM_ADC_READINGS; i++){
         for (byte j=0; j<3; j++){
-            accel_readings[j][i]=analogRead(adc_pins[j]);
+            //was accel_readings[j][i]=analogRead(adc_pins[j]);
+            accel_readings[j][i]=accel_sensor_read(j);
             //Serial.printf("Leyendo sensor %d, lectura num %d, valor %d\n", j, i, accel_readings[j][i]);
         }
     }

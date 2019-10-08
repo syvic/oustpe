@@ -6,9 +6,6 @@ unsigned long utils_get_chip_id() {
 
   chipid = ESP.getEfuseMac();
 
-  //De la MAC total del dispositivo                    (ej. 3C:71:BF:8A:DD:D8 <MAC>)
-  //Nos quedamos con los 4 bytes menos significativos: (ej. D8:DD:8A:BF) <- En este orden
-
   chipid_reduced = ((chipid & 0xFFFF00000000) >> 16) | ((chipid & 0xFFFF0000) >> 16);
 
   return chipid_reduced;
@@ -36,7 +33,7 @@ void utils_test_sender(uint16_t group) {
   }
 
   delay(1000);
-  
+
   if (1) { // Mandar mensaje de start
     msg.type = MSG_TYPE_START;
     msg.uuid = my_uuid;
